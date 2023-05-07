@@ -4,5 +4,5 @@ export const dataConfig = {
     user:'bf576db198a75d',
     password:'25eb97f8',
     database:'heroku_33979b66acbea7f',
-    port:'3307',
+    port:'3306',
 }
