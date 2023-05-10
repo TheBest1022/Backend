@@ -2,12 +2,13 @@ import { passwordEncrypt, passwordVerify } from "../helpers/helpers.js";
 import { newUser, selectLastId } from "../model/User.js";
 import { addApoderado, nameUsuario, nameDocente } from "../model/Apoderado.js";
 import { newDirector } from "../model/User.js";
+import { addDocente } from "../model/Docente.js";
 import { loginUser } from "../model/Auth.js";
 
 //--VALIDACIONES
 
 export const createUser = async (req, res) => {
-  const { documento, usuario, contraseña, Nombre, Apellido, empresa, rol } =
+  const { documento, usuario, contraseña, Nombre, Apellido, empresa, rol, curso } =
     req.body;
   if (
     !documento ||
@@ -26,11 +27,21 @@ export const createUser = async (req, res) => {
   try {
     const passwordnew = await passwordEncrypt(contraseña);
     await newUser(req.body, passwordnew);
-    if (rol == 5) {
-      newDirector(documento, Nombre, Apellido);
-    }
-    if (rol == 6) {
-    }
+    const [id] = await selectLastId();
+    setTimeout(async () => {
+      if (id.length > 0) {
+        if (rol == 5) {
+          await addDocente(req.body, id[0].id);
+        }
+        if (rol == 6) {
+          await newDirector(req.body, id[0].id);
+        }
+        return res.status(201).json({
+          status: "success",
+          message: "REGISTRADO",
+        });
+      }
+    }, 2000);
   } catch (error) {
     console.log(error);
   }

@@ -1,9 +1,9 @@
 import conexion from "../config/database.js";
 
-export const addDocente = async (data, user) => {
+export const addDocente = async (data, id) => {
   return await conexion.query(
-    "insert into docente (documento, Nombre_Docente, Apellido_Docente, IdUsuario) values (?,?,?,?)",
-    [data.documento, data.Nombre_Docente, data.Apellido_Docente, user]
+    "insert into docente (documento, Nombre, Apellido, IdUsuario) values (?,?,?,?)",
+    [data.documento, data.Nombre, data.Apellido, id]
   );
 };
 
