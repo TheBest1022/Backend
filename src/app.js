@@ -4,7 +4,7 @@ import router from "./routes/index.js";
 
 const app = express();
 
-app.set("PORT", process.env.PORT || 3000  );
+app.set("PORT", process.env.PORT || 4000  );
 app.use(express.json());
 app.use(cors());
 

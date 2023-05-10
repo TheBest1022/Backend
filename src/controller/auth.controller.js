@@ -1,10 +1,40 @@
 import { passwordEncrypt, passwordVerify } from "../helpers/helpers.js";
 import { newUser, selectLastId } from "../model/User.js";
 import { addApoderado, nameUsuario, nameDocente } from "../model/Apoderado.js";
-import { nameAdministrador } from "../model/Administrador.js";
+import { newDirector } from "../model/User.js";
 import { loginUser } from "../model/Auth.js";
 
 //--VALIDACIONES
+
+export const createUser = async (req, res) => {
+  const { documento, usuario, contraseña, Nombre, Apellido, empresa, rol } =
+    req.body;
+  if (
+    !documento ||
+    !usuario ||
+    !contraseña ||
+    !Nombre ||
+    !Apellido ||
+    !empresa ||
+    !rol
+  ) {
+    return res.status(200).json({
+      status: "error",
+      message: "EXISTEN CAMPOS VACÍOS",
+    });
+  }
+  try {
+    const passwordnew = await passwordEncrypt(contraseña);
+    await newUser(req.body, passwordnew);
+    if (rol == 5) {
+      newDirector(documento, Nombre, Apellido);
+    }
+    if (rol == 6) {
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const validarUser = async (us) => {
   const [user] = await loginUser(us);
@@ -111,8 +141,24 @@ export const singUp = async (req, res) => {
 };
 
 export const createDirector = async (req, res) => {
-  const { usuario, contraseña, rol, empresa } = req.body;
-  if (!usuario || !contraseña || !empresa || !rol) {
+  const {
+    documento,
+    Nombre_Director,
+    Apellido_Director,
+    usuario,
+    contraseña,
+    empresa,
+    rol,
+  } = req.body;
+  if (
+    !documento ||
+    !Nombre_Director ||
+    !Apellido_Director ||
+    !usuario ||
+    !contraseña ||
+    !empresa ||
+    !rol
+  ) {
     return res.status(200).json({
       status: "error",
       message: "EXISTEN CAMPOS VACÍOS",
