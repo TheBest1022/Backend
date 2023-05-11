@@ -1,4 +1,3 @@
-
 export const dataConfig = {
     host:'localhost',
     user:'root',

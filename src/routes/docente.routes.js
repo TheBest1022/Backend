@@ -37,4 +37,5 @@ router.put("/mensaje/update/:id", actualizarMensaje); // Actualizar Mensaje
 
 //Reporte
 router.get("/report/assistence/:company", excelGenerate)
+
 export default router;
