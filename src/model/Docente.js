@@ -1,5 +1,9 @@
 import conexion from "../config/database.js";
 
+export const selectIDdocente = async ()=>{
+  return await conexion.query("Select max(Id) as id from docente");
+}
+
 export const addDocente = async (data, id) => {
   return await conexion.query(
     "insert into docente (documento, Nombre, Apellido, IdUsuario) values (?,?,?,?)",
