@@ -2,14 +2,23 @@ import { passwordEncrypt, passwordVerify } from "../helpers/helpers.js";
 import { newUser, selectLastId } from "../model/User.js";
 import { addApoderado, nameUsuario, nameDocente } from "../model/Apoderado.js";
 import { newDirector } from "../model/User.js";
-import { addDocente } from "../model/Docente.js";
+import { addDocente, selectIDdocente } from "../model/Docente.js";
+import { createCourse } from "../model/Curso.js";
 import { loginUser } from "../model/Auth.js";
 
 //--VALIDACIONES
 
 export const createUser = async (req, res) => {
-  const { documento, usuario, contraseña, Nombre, Apellido, empresa, rol, curso } =
-    req.body;
+  const {
+    documento,
+    usuario,
+    contraseña,
+    Nombre,
+    Apellido,
+    empresa,
+    rol,
+    curso,
+  } = req.body;
   if (
     !documento ||
     !usuario ||
@@ -24,6 +33,28 @@ export const createUser = async (req, res) => {
       message: "EXISTEN CAMPOS VACÍOS",
     });
   }
+
+  if (documento.length != 8) {
+    return res.status(200).json({
+      status: "error",
+      message: "El documento debe tener 8 digitos",
+    });
+  }
+
+  if (contraseña.length != 4) {
+    return res.status(200).json({
+      status: "error",
+      message: "PERMISO DE CONTRASEÑA: 4 NÚMEROS",
+    });
+  }
+
+  if (rol == 5 && curso.length != 0) {
+    return res.status(200).json({
+      status: "error",
+      message: "Debe seleccionar al menos un curso",
+    });
+  }
+
   try {
     const passwordnew = await passwordEncrypt(contraseña);
     await newUser(req.body, passwordnew);
@@ -32,6 +63,19 @@ export const createUser = async (req, res) => {
       if (id.length > 0) {
         if (rol == 5) {
           await addDocente(req.body, id[0].id);
+          const [idDocente] = await selectIDdocente();
+          setTimeout(async () => {
+            if (id.length > 0) {
+              curso.map(async ({ id }) => {
+                await createCourse(idDocente[0].id, id);
+              });
+            } else {
+              return res.status(200).json({
+                status: "error",
+                message: "El docento se creó sin cursos | error interno",
+              });
+            }
+          });
         }
         if (rol == 6) {
           await newDirector(req.body, id[0].id);
