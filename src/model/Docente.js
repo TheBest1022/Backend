@@ -1,8 +1,8 @@
 import conexion from "../config/database.js";
 
-export const selectIDdocente = async ()=>{
+export const selectIDdocente = async () => {
   return await conexion.query("Select max(Id) as id from docente");
-}
+};
 
 export const addDocente = async (data, id) => {
   return await conexion.query(
@@ -13,17 +13,18 @@ export const addDocente = async (data, id) => {
 
 export const nameDocente = async (id) => {
   return await conexion.query(
-    `Select docente.Nombre_Docente, docente.Apellido_Docente, usuario.IdRol, usuario.Id, curso.idDocente as idDocente, curso.Descripción, docente.Id, curso.id as idCurso
-      from usuario
-      inner join docente on usuario.id = docente.idUsuario
-      inner join curso on curso.idDocente = docente.Id
-    where usuario.id_empresa = ?`, [id]
+    `select usuario.Id, usuario.IdRol, docente.Nombre, docente.Apellido, docente.Id as idDocente, curso.Descripción, curso.id as idCurso
+    from dt_curso_docente dt inner join docente on dt.id_docente = docente.Id
+                             inner join curso on dt.id_curso = curso.Id
+                             inner join usuario on usuario.Id = docente.IdUsuario
+    where usuario.id_empresa = ?`,
+    [id]
   );
 };
 
 export const getDocente = async (id) => {
   return await conexion.query(
-    `Select docente.Nombre_Docente, docente.Apellido_Docente, usuario.Id, docente.Id
+    `Select docente.Nombre, docente.Apellido, usuario.Id, docente.Id
       from usuario
       inner join docente on usuario.id = docente.idUsuario
       where docente.Id = ?`,
@@ -33,7 +34,7 @@ export const getDocente = async (id) => {
 
 export const updateDocente = async (data) => {
   return await conexion.query(
-    `UPDATE docente set Nombre_Docente = ?, Apellido_Docente = ?
+    `UPDATE docente set Nombre = ?, Apellido = ?
     where Id = ?`,
     [data.Nombre_Docente, data.Apellido_Docente, data.idDocente]
   );
@@ -97,4 +98,3 @@ export const updateMessage = async (Id) => {
     Id,
   ]);
 };
-
