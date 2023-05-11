@@ -75,7 +75,7 @@ export const createUser = async (req, res) => {
                 message: "El docento se creó sin cursos | error interno",
               });
             }
-          });
+          }, 2000);
         }
         if (rol == 6) {
           await newDirector(req.body, id[0].id);
