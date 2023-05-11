@@ -48,7 +48,7 @@ export const createUser = async (req, res) => {
     });
   }
 
-  if (rol == 5 && curso.length != 0) {
+  if (rol == 5 && curso.length == 0) {
     return res.status(200).json({
       status: "error",
       message: "Debe seleccionar al menos un curso",

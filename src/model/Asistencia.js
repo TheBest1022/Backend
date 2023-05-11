@@ -10,7 +10,7 @@ export const insertAssistence = async (id, data, estado) => {
 //Traer reporte de asistencia
 export const selectAssistence = async (id) => {
   return await conexion.query(
-    `select a.id as id, d.Nombre_Docente as docente, ap.Nombre_Niño as estudiante, c.Descripción as curso, a.estado as estado, a.fecha as fecha, c.id as id_curso, d.Id as id_docente, ap.Id as id_estudiante, em.nombre as empresa
+    `select a.id as id, d.Nombre as docente, ap.Nombre_Niño as estudiante, c.Descripción as curso, a.estado as estado, a.fecha as fecha, c.id as id_curso, d.Id as id_docente, ap.Id as id_estudiante, em.nombre as empresa
     from asistencia a inner join docente d on a.id_docente = d.Id
                     inner join apoderado ap on a.id_estudiante=ap.Id
                     inner join curso c on d.Id = c.idDocente

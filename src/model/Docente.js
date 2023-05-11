@@ -34,7 +34,7 @@ export const getDocente = async (id) => {
 
 export const updateDocente = async (data) => {
   return await conexion.query(
-    `UPDATE docente set Nombre = ?, Apellido = ?
+    `UPDATE docente set Nombre_Docente = ?, Apellido_Docente = ?
     where Id = ?`,
     [data.Nombre_Docente, data.Apellido_Docente, data.idDocente]
   );
