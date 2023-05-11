@@ -13,7 +13,7 @@ export const addDocente = async (data, id) => {
 
 export const nameDocente = async (id) => {
   return await conexion.query(
-    `Select docente.Nombre_Docente, docente.Apellido_Docente, usuario.IdRol, usuario.Id, curso.idDocente as idDocente, curso.Descripción, docente.Id, curso.id as idCurso
+    `Select docente.Nombre, docente.Apellido, usuario.IdRol, usuario.Id, curso.idDocente as idDocente, curso.Descripción, docente.Id, curso.id as idCurso
       from usuario
       inner join docente on usuario.id = docente.idUsuario
       inner join curso on curso.idDocente = docente.Id
@@ -23,7 +23,7 @@ export const nameDocente = async (id) => {
 
 export const getDocente = async (id) => {
   return await conexion.query(
-    `Select docente.Nombre_Docente, docente.Apellido_Docente, usuario.Id, docente.Id
+    `Select docente.Nombre, docente.Apellido, usuario.Id, docente.Id
       from usuario
       inner join docente on usuario.id = docente.idUsuario
       where docente.Id = ?`,
@@ -33,7 +33,7 @@ export const getDocente = async (id) => {
 
 export const updateDocente = async (data) => {
   return await conexion.query(
-    `UPDATE docente set Nombre_Docente = ?, Apellido_Docente = ?
+    `UPDATE docente set Nombre = ?, Apellido= ?
     where Id = ?`,
     [data.Nombre_Docente, data.Apellido_Docente, data.idDocente]
   );

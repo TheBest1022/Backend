@@ -19,7 +19,7 @@ export const addApoderado = async (data, user) => {
   export const nameDocente = async (user) => {
     try {
       const [results] = await conexion.query(
-        `Select docente.documento, docente.Nombre_Docente, usuario.IdRol, curso.idDocente, curso.id as curso, usuario.Id as usuario, usuario.id_empresa
+        `Select docente.documento, docente.Nombre, usuario.IdRol, curso.idDocente, curso.id as curso, usuario.Id as usuario, usuario.id_empresa
         from usuario
         inner join docente on usuario.id = docente.IdUsuario
         inner join curso on curso.idDocente = docente.Id
