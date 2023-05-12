@@ -2,6 +2,7 @@ import { passwordEncrypt, passwordVerify } from "../helpers/helpers.js";
 import { newUser, selectLastId } from "../model/User.js";
 import { addApoderado, nameUsuario, nameDocente } from "../model/Apoderado.js";
 import { newDirector } from "../model/User.js";
+import { nameAdministrador } from "../model/Administrador.js";
 import { addDocente, selectIDdocente } from "../model/Docente.js";
 import { createCourse } from "../model/Curso.js";
 import { loginUser } from "../model/Auth.js";

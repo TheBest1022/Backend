@@ -19,10 +19,10 @@ export const addApoderado = async (data, user) => {
   export const nameDocente = async (user) => {
     try {
       const [results] = await conexion.query(
-        `Select docente.documento, docente.Nombre, usuario.IdRol, curso.idDocente, curso.id as curso, usuario.Id as usuario, usuario.id_empresa
-        from usuario
-        inner join docente on usuario.id = docente.IdUsuario
-        inner join curso on curso.idDocente = docente.Id
+        `select usuario.Id, usuario.IdRol, docente.Nombre, docente.Apellido, docente.Id as idDocente, curso.Descripción, curso.id as idCurso, usuario.id_empresa
+    from dt_curso_docente dt inner join docente on dt.id_docente = docente.Id
+                             inner join curso on dt.id_curso = curso.Id
+                             inner join usuario on usuario.Id = docente.IdUsuario
         where usuario.usuario = ?`,[user]
       );
       console.log("Results from nameDocente:", results); // Añadir un registro para depurar los resultados

@@ -13,7 +13,7 @@ export const addDocente = async (data, id) => {
 
 export const nameDocente = async (id) => {
   return await conexion.query(
-    `select usuario.Id, usuario.IdRol, docente.Nombre, docente.Apellido, docente.Id as idDocente, curso.Descripción, curso.id as idCurso
+    `select usuario.Id, usuario.IdRol, docente.Nombre,docente.documento, docente.Apellido, docente.Id as idDocente, curso.Descripción, curso.id as idCurso, usuario.id_empresa
     from dt_curso_docente dt inner join docente on dt.id_docente = docente.Id
                              inner join curso on dt.id_curso = curso.Id
                              inner join usuario on usuario.Id = docente.IdUsuario
