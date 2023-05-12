@@ -120,9 +120,9 @@ export const ActualizarDocente = async (req, res) => {
 };
 
 export const agregarTema = async (req, res) => {
-  const { description, idCurso } = req.body;
+  const { Descripcion, idCurso } = req.body;
   console.log(req.body);
-  if (!description || !idCurso) {
+  if (!Descripcion || !idCurso) {
     return res.status(200).json({
       status: "error",
       message: "EXISTEN CAMPOS VACÍOS",

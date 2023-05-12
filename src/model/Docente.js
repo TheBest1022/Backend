@@ -43,13 +43,13 @@ export const updateDocente = async (data) => {
 export const addTema = async (data) => {
   return await conexion.query(
     "insert into tema (Descripcion, idCurso) values (?,?)",
-    [data.description, data.idCurso]
+    [data.Descripcion, data.idCurso]
   );
 };
 
 export const getTemaId = async (id) => {
   return await conexion.query(
-    `select tema.Descripcion, tema.idCurso, tema.idTema, tema.Pdf
+    `select tema.Descripcion, tema.idCurso, tema.idTema, tema.Pdf, tema.Imagen, tema.Sonido
     from tema 
     inner join curso on curso.id = tema.idCurso
     where tema.idCurso = ?`,
