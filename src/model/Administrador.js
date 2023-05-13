@@ -20,3 +20,12 @@ export const selectAllUserForCompany = async (id) => {
     [id]
   );
 };
+export const selectAllUser = async () => {
+  return await conexion.query(
+    `
+  select usuario.Id as id, usuario.Usuario as usuario, rol.Rol as rol, empresa.nombre as institucion
+  from usuario inner join rol on rol.Id = usuario.IdRol
+               inner join empresa on empresa.id = usuario.id_empresa
+  `
+  );
+};

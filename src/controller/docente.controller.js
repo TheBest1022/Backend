@@ -10,6 +10,7 @@ import {
   obtenerMessage,
   addCurso,
   updateMessage,
+  selectAllDocente,
 } from "../model/Docente.js";
 import { passwordEncrypt } from "../helpers/helpers.js";
 import { newUser, selectLastId, selectLastIdCurso } from "../model/User.js";
@@ -17,8 +18,15 @@ import { selectAssistence } from "../model/Asistencia.js";
 import excel from "xlsx";
 
 export const singUpDocente = async (req, res) => {
-  const { documento, Nombre_Docente, Apellido_Docente, usuario, password, idCurso, rol } =
-    req.body;
+  const {
+    documento,
+    Nombre_Docente,
+    Apellido_Docente,
+    usuario,
+    password,
+    idCurso,
+    rol,
+  } = req.body;
   console.log(req.body);
   if (
     !documento ||
@@ -72,8 +80,13 @@ export const singUpDocente = async (req, res) => {
 
 export const obtenerNombreDocente = async (req, res) => {
   try {
-    const [data] = await nameDocente(req.params.empresa);
-    return res.status(201).json(data);
+    if (req.params.empresa == "null") {
+      const [data] = await selectAllDocente();
+      return res.status(201).json(data);
+    } else {
+      const [data] = await nameDocente(req.params.empresa);
+      return res.status(201).json(data);
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -246,7 +259,7 @@ export const excelGenerate = async (req, res) => {
         Curso: item.curso,
         Estado: item.estado,
         Fecha: item.fecha,
-        Colegio: item.empresa
+        Colegio: item.empresa,
       };
     });
 
@@ -254,7 +267,15 @@ export const excelGenerate = async (req, res) => {
     outputData.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
 
     const ws = excel.utils.json_to_sheet(outputData, {
-      header: ["Id", "Estudiante", "Docente", "Curso", "Estado", "Fecha", "Colegio"],
+      header: [
+        "Id",
+        "Estudiante",
+        "Docente",
+        "Curso",
+        "Estado",
+        "Fecha",
+        "Colegio",
+      ],
       skipHeader: false,
     });
 

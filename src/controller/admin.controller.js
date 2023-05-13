@@ -1,9 +1,14 @@
-import { selectAllUserForCompany } from "../model/Administrador.js";
+import { selectAllUserForCompany, selectAllUser } from "../model/Administrador.js";
 
 export const getUsersForCompany = async (req, res) => {
   try {
-    const [data] = await selectAllUserForCompany(req.params.id);
-    return res.status(200).json(data);
+    if(req.params.id == "null"){
+      const [data] = await selectAllUser();
+      return res.status(200).json(data);
+    }else{
+      const [data] = await selectAllUserForCompany(req.params.id);
+      return res.status(200).json(data);
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).json({
