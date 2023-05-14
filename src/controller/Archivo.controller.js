@@ -56,4 +56,10 @@ export const mostrarPdf = async (req, res) => {
   res.sendFile(filePath);
 }
 
+export const playSound = async (req, res) => {
+  const filename = req.params.soundname;
+  const filePath = join(__dirname, "../uploads/Sound/", filename);
+  res.sendFile(filePath);
+}
+
 export default upload;

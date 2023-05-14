@@ -17,6 +17,7 @@ import upload, {
   subirPDf,
   modificarTema,
   mostrarPdf,
+  playSound
 } from "../controller/Archivo.controller.js";
 
 const router = Router();
@@ -31,6 +32,7 @@ router.delete("/delete/:id", borrarTema); // Eliminar
 router.post("/upload", upload.single("file"), subirPDf); //subir pdf
 router.put("/updatePdf", modificarTema); //ModificarTema
 router.get("/file/:filename", mostrarPdf); //Mostras Nuevo Pdf
+router.get("/sound/:soundname", playSound); //enviar mp3
 router.post("/mensaje", mensajeNuevo); // Enviar Mensaje
 router.get("/mensaje/:id", obtenerMensajeId); // Enviar Mensaje
 router.put("/mensaje/update/:id", actualizarMensaje); // Actualizar Mensaje
