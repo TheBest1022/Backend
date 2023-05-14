@@ -52,7 +52,7 @@ export const modificarTema = async (req, res) => {
 
 export const mostrarPdf = async (req, res) => {
   const filename = req.params.filename;
-  const filePath = join(__dirname, "../uploads", filename);
+  const filePath = join(__dirname, "../uploads/PDF/", filename);
   res.sendFile(filePath);
 }
 
