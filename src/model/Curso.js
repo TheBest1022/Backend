@@ -20,3 +20,16 @@ export const selectCourse = async (id) => {
     [id]
   );
 };
+
+export const selectThemeForCourse = async (docente, curso) => {
+  return conexion.query(
+    `
+    select tema.Descripcion, tema.idCurso, tema.idTema, tema.Pdf, tema.Imagen, tema.Sonido, docente.Id, curso.Descripción as curso
+    from dt_curso_docente dt inner join curso on curso.Id = dt.id_curso
+                             inner join docente on docente.Id = dt.id_docente
+                             inner join tema on tema.idCurso = curso.Id
+    where docente.Id = ? and curso.Id = ?
+    `,
+    [docente, curso]
+  );
+};

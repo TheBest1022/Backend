@@ -133,7 +133,7 @@ export const ActualizarDocente = async (req, res) => {
 };
 
 export const agregarTema = async (req, res) => {
-  const { Descripcion, idCurso } = req.body;
+  const { name, idCurso } = req.body;
   console.log(req.body);
   if (!Descripcion || !idCurso) {
     return res.status(200).json({
