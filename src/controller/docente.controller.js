@@ -135,7 +135,7 @@ export const ActualizarDocente = async (req, res) => {
 export const agregarTema = async (req, res) => {
   const { name, idCurso } = req.body;
   console.log(req.body);
-  if (!Descripcion || !idCurso) {
+  if (!name || !idCurso) {
     return res.status(200).json({
       status: "error",
       message: "EXISTEN CAMPOS VACÍOS",
@@ -145,7 +145,7 @@ export const agregarTema = async (req, res) => {
     await addTema(req.body);
     return res.status(201).json({
       status: "success",
-      message: "AGREGADO",
+      message: "Tema agregado",
     });
   } catch (error) {
     console.log(error);

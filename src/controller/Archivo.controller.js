@@ -1,4 +1,5 @@
 import multer from "multer";
+import fs from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { updatePdf } from "../model/Docente.js";
@@ -7,11 +8,19 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Funcion Multer -- configuración
 const storage = multer.diskStorage({
-  destination: join(__dirname, "../uploads"),
+  destination: join(__dirname, "../uploads/PDF"),
   filename: (req, file, cb) => {
+    const filePath = join(__dirname, "../uploads/PDF/", file.originalname);
+
+    // Borrar el archivo si ya existe
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
     cb(null, file.originalname);
   },
 });
+
 const upload = multer({ storage });
 
 export const subirPDf = async (req, res) => {
@@ -28,7 +37,7 @@ export const subirPDf = async (req, res) => {
 
 export const modificarTema = async (req, res) => {
   const { idTema, Pdf } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   if (!idTema || !Pdf) {
     return res.status(200).json({
       status: "error",
@@ -54,12 +63,12 @@ export const mostrarPdf = async (req, res) => {
   const filename = req.params.filename;
   const filePath = join(__dirname, "../uploads/PDF/", filename);
   res.sendFile(filePath);
-}
+};
 
 export const playSound = async (req, res) => {
   const filename = req.params.soundname;
   const filePath = join(__dirname, "../uploads/Sound/", filename);
   res.sendFile(filePath);
-}
+};
 
 export default upload;

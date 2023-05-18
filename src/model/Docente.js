@@ -50,8 +50,8 @@ export const updateDocente = async (data) => {
 
 export const addTema = async (data) => {
   return await conexion.query(
-    "insert into tema (Descripcion, idCurso) values (?,?)",
-    [data.Descripcion, data.idCurso]
+    "insert into tema (Descripcion,Pdf, idCurso) values (?,?,?)",
+    [data.name,data.nameFile, data.idCurso]
   );
 };
 
