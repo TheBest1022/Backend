@@ -13,19 +13,23 @@ export const addDocente = async (data, id) => {
 
 export const selectAllDocente = async () => {
   return await conexion.query(
-    `select usuario.Id, usuario.IdRol, docente.Nombre,docente.documento, docente.Apellido, docente.Id as idDocente, curso.Descripción, curso.id as idCurso, usuario.id_empresa
+    `select usuario.Id as id, usuario.IdRol, docente.Nombre,docente.documento, docente.Apellido, docente.Id as idDocente, curso.Descripción, curso.id as idCurso, usuario.id_empresa, empresa.nombre as empresa, usuario.estado
     from dt_curso_docente dt inner join docente on dt.id_docente = docente.Id
                              inner join curso on dt.id_curso = curso.Id
-                             inner join usuario on usuario.Id = docente.IdUsuario`
+                             inner join usuario on usuario.Id = docente.IdUsuario
+                             inner join empresa on usuario.id_empresa = empresa.id
+    GROUP BY docente.Id`
   );
 };
 export const nameDocente = async (id) => {
   return await conexion.query(
-    `select usuario.Id, usuario.IdRol, docente.Nombre,docente.documento, docente.Apellido, docente.Id as idDocente, curso.Descripción, curso.id as idCurso, usuario.id_empresa
+    `select usuario.Id as id, usuario.IdRol, docente.Nombre,docente.documento, docente.Apellido, docente.Id as idDocente, curso.Descripción, curso.id as idCurso, usuario.id_empresa, empresa.nombre as empresa, usuario.estado
     from dt_curso_docente dt inner join docente on dt.id_docente = docente.Id
                              inner join curso on dt.id_curso = curso.Id
                              inner join usuario on usuario.Id = docente.IdUsuario
-    where usuario.id_empresa = ?`,
+                             inner join empresa on usuario.id_empresa = empresa.id
+    where usuario.id_empresa = ?
+    GROUP BY docente.Id`,
     [id]
   );
 };
@@ -42,9 +46,9 @@ export const getDocente = async (id) => {
 
 export const updateDocente = async (data) => {
   return await conexion.query(
-    `UPDATE docente set Nombre_Docente = ?, Apellido_Docente = ?
+    `UPDATE docente set Nombre = ?, Apellido = ?
     where Id = ?`,
-    [data.Nombre_Docente, data.Apellido_Docente, data.idDocente]
+    [data.Nombre, data.Apellido, data.id_docente]
   );
 };
 
