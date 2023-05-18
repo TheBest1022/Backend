@@ -6,9 +6,9 @@
   port: "3306",
 };*/
 export const dataConfig = {
-  host: "root",
-  user: "localhost",
+  host: "localhost",
+  user: "root",
   password: "",
-  database: "bda_appf",
+  database: "bda_app",
   port: "3307",
 };
