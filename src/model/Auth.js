@@ -6,3 +6,9 @@ export const loginUser = async (user) => {
       [user]
     );
   };
+export const loginUserForId = async (user) => {
+    return await conexion.query(
+      "select * from usuario where Id = ? ",
+      [user]
+    );
+  };

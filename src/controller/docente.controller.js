@@ -82,10 +82,10 @@ export const obtenerNombreDocente = async (req, res) => {
   try {
     if (req.params.empresa == "null") {
       const [data] = await selectAllDocente();
-      return res.status(201).json(data);
+      return res.status(200).json(data);
     } else {
       const [data] = await nameDocente(req.params.empresa);
-      return res.status(201).json(data);
+      return res.status(200).json(data);
     }
   } catch (error) {
     console.log(error);
