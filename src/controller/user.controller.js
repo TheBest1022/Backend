@@ -34,7 +34,6 @@ export const getUserTeachForId = async (req, res) => {
 export const updateUserTeachForId = async (req, res) => {
   const { Nombre, Apellido, rol, empresa, id_docente, id_usuario } = req.body;
   if (!Nombre || !Apellido || !rol || !empresa || !id_docente || !id_usuario) {
-    console.log(req.body);
     return res.status(200).json({
       status: "error",
       message: "DATOS VACIOS",

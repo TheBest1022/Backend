@@ -1,4 +1,4 @@
-import { insertCompany, selectCompany } from "../model/Empresa.js";
+import { insertCompany, selectCompany, updateCompany, selectCompanyForId} from "../model/Empresa.js";
 
 export const getEmpresa = async (req, res) => {
   try {
@@ -43,3 +43,39 @@ export const createCompany = async (req, res) => {
     });
   }
 };
+
+export const updateCompanyId = async (req, res) => {
+  const {nombre, distrito, provincia, departamento } = req.body;
+  if (!nombre || !distrito || !provincia || !departamento) {
+    return res.status(200).json({
+      status: "error",
+      message: "CAMPOS VACIOS",
+    });
+  }
+  try {
+    await updateCompany(req.body);
+    return res.status(201).json({
+      status: "success",
+      message: "ACTUALIZADO",
+    });
+  }catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      status: "error",
+      message: `ERROR DE SERVIDOR: ${error}`,
+    });
+  }
+};
+
+export const getUserCompanyId = async (req, res) => {
+  try {
+    const [data] = await selectCompanyForId(req.params.id);
+    return res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ status: "error", message: "ERROR DE SERVIDOR" });
+  }
+
+}
