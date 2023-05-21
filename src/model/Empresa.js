@@ -15,17 +15,17 @@ export const insertCompany = async (data) => {
 export const updateCompany = async (data) => {
   return await conexion.query(
     `
-    update empresa set nombre = ?, distrito = ?, provincia = ?, departamento = ?
+    update empresa set nombre = ? , distrito = ? , provincia = ? , departamento = ? 
     where empresa.id = ?
     `,
-    [data.nombre, data.distrito, data.provincia, data.departamento]
+    [data.Nombre, data.Distrito, data.Provincia, data.Departamento, data.id]
   );
 }
 
 export const selectCompanyForId = async (id) => {
   return await conexion.query(
     `
-    select empresa.id as Id_empresa, empresa.nombre as Nombre, empresa.distrito as Distrito, empresa.provincia as Provincia, empresa.departamento as Departamento
+    select empresa.id as id, empresa.nombre as Nombre, empresa.distrito as Distrito, empresa.provincia as Provincia, empresa.departamento as Departamento
     from empresa
     where empresa.id = ?
     `, [id]

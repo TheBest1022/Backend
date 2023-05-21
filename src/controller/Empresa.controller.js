@@ -45,8 +45,8 @@ export const createCompany = async (req, res) => {
 };
 
 export const updateCompanyId = async (req, res) => {
-  const {nombre, distrito, provincia, departamento } = req.body;
-  if (!nombre || !distrito || !provincia || !departamento) {
+  const {Nombre, Distrito, Provincia, Departamento } = req.body;
+  if (!Nombre || !Distrito || !Provincia || !Departamento) {
     return res.status(200).json({
       status: "error",
       message: "CAMPOS VACIOS",

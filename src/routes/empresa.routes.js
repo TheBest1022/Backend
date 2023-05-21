@@ -11,6 +11,6 @@ router.get("/:id", getUserCompanyId)
 router.post("/", createCompany);
 
 //update
-router.put("/company/:id", updateCompanyId);
+router.put("/:id", updateCompanyId);
 
 export default router;
