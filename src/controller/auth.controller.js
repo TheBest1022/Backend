@@ -2,6 +2,7 @@ import { passwordEncrypt, passwordVerify } from "../helpers/helpers.js";
 import { newUser, selectLastId } from "../model/User.js";
 import { addApoderado, nameUsuario, nameDocente } from "../model/Apoderado.js";
 import { newDirector } from "../model/User.js";
+import { newPsicologo, namePsicologo } from "../model/Psicologo.js";
 import { nameAdministrador } from "../model/Administrador.js";
 import { addDocente, selectIDdocente } from "../model/Docente.js";
 import { createCourse } from "../model/Curso.js";
@@ -81,6 +82,9 @@ export const createUser = async (req, res) => {
         if (rol == 6) {
           await newDirector(req.body, id[0].id);
         }
+        if (rol == 8) {
+          await newPsicologo(req.body, id[0].id);
+        }
         return res.status(201).json({
           status: "success",
           message: "REGISTRADO",
@@ -104,7 +108,6 @@ const validarPass = async (pass, user) => {
 
 export const singIng = async (req, res) => {
   const { us, password } = req.body;
-  console.log(req.body);
   if (!us || !password) {
     return res.status(200).json({
       status: "error",
@@ -134,9 +137,11 @@ export const singIng = async (req, res) => {
         ? await nameUsuario(us)
         : user[0].IdRol == 6
         ? await nameAdministrador(us)
+        : user[0].IdRol == 8
+        ? await namePsicologo(us)
         : await nameDocente(us);
 
-    console.log(data);
+
     let getData = user[0].IdRol == 5 ? data : data[0];
 
     if (!data || data.length === 0) {

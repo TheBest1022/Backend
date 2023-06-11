@@ -27,7 +27,6 @@ export const singUpDocente = async (req, res) => {
     idCurso,
     rol,
   } = req.body;
-  console.log(req.body);
   if (
     !documento ||
     !Nombre_Docente ||
