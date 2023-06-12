@@ -1,4 +1,4 @@
-import { newRegisterRias } from "../model/Psicologo";
+import { newRegisterRias } from "../model/Psicologo.js";
 
 export const registerRias = async (req, res) => {
   const {
@@ -7,14 +7,14 @@ export const registerRias = async (req, res) => {
     empresa,
     sexo,
     nivel,
-    Evaluación,
-    Nacimiento,
-    Adivinanza,
-    Categorias,
-    Analogias,
-    Figuras,
-    Verbal,
-    NoVerbal,
+    fechaEval,
+    fechaNac,
+    adivinanza,
+    categorias,
+    analogias,
+    figuras,
+    verbal,
+    no_verbal,
     ad,
     an,
     ca,
@@ -25,10 +25,10 @@ export const registerRias = async (req, res) => {
     TotalNRv,
     Total,
     Memoria,
-    Indice_Verbal,
-    Indice_No_Verbal,
-    Indice_General,
-    Indice_Memoria,
+    Indiceverbal,
+    IndiceNoverbal,
+    IndiceGeneral,
+    IndiceMemoria,
   } = req.body;
   if (
     !datos ||
@@ -36,14 +36,14 @@ export const registerRias = async (req, res) => {
     !empresa ||
     !sexo ||
     !nivel ||
-    !Evaluación ||
-    !Nacimiento ||
-    !Adivinanza ||
-    !Categorias ||
-    !Analogias ||
-    !Figuras ||
-    !Verbal ||
-    !NoVerbal ||
+    !fechaEval ||
+    !fechaNac ||
+    !adivinanza ||
+    !categorias ||
+    !analogias ||
+    !figuras ||
+    !verbal ||
+    !no_verbal ||
     !ad ||
     !an ||
     !ca ||
@@ -54,10 +54,10 @@ export const registerRias = async (req, res) => {
     !TotalNRv ||
     !Total ||
     !Memoria ||
-    !Indice_Verbal ||
-    !Indice_No_Verbal ||
-    Indice_General ||
-    !Indice_Memoria
+    !Indiceverbal ||
+    !IndiceNoverbal ||
+    IndiceGeneral ||
+    !IndiceMemoria
   ) {
     return res.status(200).json({
       status: "error",
