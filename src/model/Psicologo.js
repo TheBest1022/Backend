@@ -38,9 +38,9 @@ export const namePsicologo = async (user) => {
 
 //RIAS
 
-export const newRegisterRias = async (data, id) => {
+export const newRegisterRias = async (data) => {
   return await conexion.query(
-    `inser into  rias (idapoderado, Nombre, idempresa, sexo, nivel, fecha_evaluación, fecha_nac, adivinanza, categorias, 
+    `insert into  rias (idapoderado, Nombre, idempresa, sexo, nivel, fecha_evaluación, fecha_nac, adivinanza, categorias, 
             analogias,figuras, verbal, no_verbal, ad, an, ca, fi, mv, mnv, TotalRv, TotalNRv, Total, Memoria, Indice_Verbal, 
             Indice_No_Verbal, Indice_General, Indice_Memoria) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         `,
