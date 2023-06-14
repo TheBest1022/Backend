@@ -2,7 +2,7 @@ import { newRegisterRias } from "../model/Psicologo.js";
 
 export const registerRias = async (req, res) => {
   const {
-    datos,
+    apoderado,
     nombre,
     empresa,
     sexo,
@@ -20,7 +20,7 @@ export const registerRias = async (req, res) => {
     ca,
     fi,
     mv,
-    mnv,
+    mvn,
     TotalRv,
     TotalNRv,
     Total,
@@ -31,7 +31,7 @@ export const registerRias = async (req, res) => {
     IndiceMemoria,
   } = req.body;
   if (
-    !datos ||
+    !apoderado ||
     !nombre ||
     !empresa ||
     !sexo ||
@@ -49,14 +49,14 @@ export const registerRias = async (req, res) => {
     !ca ||
     !fi ||
     !mv ||
-    !mnv ||
+    !mvn ||
     !TotalRv ||
     !TotalNRv ||
     !Total ||
     !Memoria ||
     !Indiceverbal ||
     !IndiceNoverbal ||
-    IndiceGeneral ||
+    !IndiceGeneral ||
     !IndiceMemoria
   ) {
     return res.status(200).json({
@@ -65,15 +65,11 @@ export const registerRias = async (req, res) => {
     });
   }
   try {
-    setTimeout(async () => {
-      if (id.length > 0) {
-        await newRegisterRias(req.body, id[0].id);
-        return res.status(201).json({
-          status: "sucess",
-          message: "Registrado",
-        });
-      }
-    }, 2000);
+    await newRegisterRias(req.body);
+    return res.status(201).json({
+      status: "sucess",
+      message: "Formulario Registrado",
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({

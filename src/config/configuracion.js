@@ -12,7 +12,7 @@ export const dataConfig = {
   user: "root",
   password: "",
   database: "bda_app",
-  port: "3307",
+  port: "3306",
 };
 /*
 
