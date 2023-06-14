@@ -38,20 +38,20 @@ export const namePsicologo = async (user) => {
 
 //RIAS
 
-export const newRegisterRias = async (data, id) => {
+export const newRegisterRias = async (data) => {
   return await conexion.query(
-    `inser into  rias (idapoderado, Nombre, idempresa, sexo, nivel, fecha_evaluación, fecha_nac, adivinanza, categorias, 
+    `insert into  rias (Idapoderado, Nombre, idempresa, sexo, nivel, fecha_evaluación, fecha_nac, adivinanza, categorias, 
             analogias,figuras, verbal, no_verbal, ad, an, ca, fi, mv, mnv, TotalRv, TotalNRv, Total, Memoria, Indice_Verbal, 
             Indice_No_Verbal, Indice_General, Indice_Memoria) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         `,
     [
-      data.idapoderado,
-      data.Nombre,
-      data.idempresa,
+      data.apoderado,
+      data.nombre,
+      data.empresa,
       data.sexo,
       data.nivel,
-      data.fecha_evaluación,
-      data.fecha_nac,
+      data.fechaEval,
+      data.fechaNac,
       data.adivinanza,
       data.categorias,
       data.analogias,
@@ -66,12 +66,12 @@ export const newRegisterRias = async (data, id) => {
       data.mvn,
       data.TotalRv,
       data.TotalNRv,
-      Total,
-      Memoria,
-      Indice_Verbal,
-      Indice_No_Verbal,
-      Indice_General,
-      Indice_Memoria,
+      data.Total,
+      data.Memoria,
+      data.Indiceverbal,
+      data.IndiceNoverbal,
+      data.IndiceGeneral,
+      data.IndiceMemoria,
     ]
   );
 };
