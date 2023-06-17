@@ -17,6 +17,6 @@ router.use('/api/docente', Docente)
 router.use('/api/student', Student)
 router.use('/api/company', Empresa)
 router.use('/api/course', Curso)
-router.use('/api/piscogolo', Psicologo)
+router.use('/api/psicologo', Psicologo)
 
 export default router

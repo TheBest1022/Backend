@@ -35,9 +35,16 @@ export const namePsicologo = async (user) => {
     [user]
   );
 };
-
+//DATOS-PSICOLOGO
+export const selectPsicoFroCompany = async (id) => {
+  return await conexion.query(
+    `select psicologo.id as id, psicologo.Nombre as name, psicologo.iduser as user, usuario.id_empresa
+    from psicologo inner join usuario on psicologo.iduser = usuario.Id
+    where usuario.id_empresa = ?`,
+    [id]
+  );
+};
 //RIAS
-
 export const newRegisterRias = async (data) => {
   return await conexion.query(
     `insert into  rias (Idapoderado, Nombre, idempresa, sexo, nivel, fecha_evaluación, fecha_nac, adivinanza, categorias, 

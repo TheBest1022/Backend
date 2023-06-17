@@ -1,4 +1,4 @@
-import { newRegisterRias } from "../model/Psicologo.js";
+import { newRegisterRias, selectPsicoFroCompany } from "../model/Psicologo.js";
 
 export const registerRias = async (req, res) => {
   const {
@@ -70,6 +70,19 @@ export const registerRias = async (req, res) => {
       status: "sucess",
       message: "Formulario Registrado",
     });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      status: "error",
+      message: `ERROR DE SERVIDOR: ${error}`,
+    });
+  }
+};
+
+export const getPsicoForCompany = async (req, res) => {
+  try {
+    const [data] = await selectPsicoFroCompany(req.params.empresa);
+    return res.status(201).json(data);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
