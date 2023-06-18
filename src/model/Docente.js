@@ -28,8 +28,7 @@ export const nameDocente = async (id) => {
                              inner join curso on dt.id_curso = curso.Id
                              inner join usuario on usuario.Id = docente.IdUsuario
                              inner join empresa on usuario.id_empresa = empresa.id
-    where usuario.id_empresa = ?
-    GROUP BY docente.Id`,
+    where usuario.id_empresa = ?`,
     [id]
   );
 };

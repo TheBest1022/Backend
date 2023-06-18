@@ -4,6 +4,6 @@ import { getCourseForId, getCourseForTheme } from "../controller/curso.controlle
 const router = Router();
 
 router.get("/docente/:id", getCourseForId)
-router.get("/:docente/theme/:curso", getCourseForTheme)
+router.get("/:docente/tema/:curso", getCourseForTheme)
 
 export default router;
