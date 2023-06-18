@@ -88,7 +88,7 @@ export const sendMensaje = async (data) => {
 
 export const obtenerMessage = async (id) => {
   return await conexion.query(
-    `Select mensaje.Id as id, mensaje.Mensaje as Mensaje, curso.id as curso, mensaje.Estado
+    `Select mensaje.Id as id, mensaje.Mensaje as Mensaje, curso.Descripción as curso, mensaje.Estado, mensaje.fecha
       from mensaje
       inner join curso on mensaje.idCurso = curso.id
       where mensaje.idCurso = ?`,
