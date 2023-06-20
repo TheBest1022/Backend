@@ -6,6 +6,6 @@ import { getUsersForCompany } from "../controller/admin.controller.js";
 const router = Router();
 
 router.get("/:id/users", getUsersForCompany); // ingresar
-router.post("/register", createUser); // ingresar
+router.post("/register", createUser); // REGISTRAR
 
 export default router;
