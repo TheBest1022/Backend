@@ -1,4 +1,9 @@
-import { newRegisterRias, selectPsicoFroCompany } from "../model/Psicologo.js";
+import {
+  newRegisterRias,
+  selectPsicoFroCompany,
+  selectAlStudentForCompany,
+  selectAllStudent,
+} from "../model/Psicologo.js";
 
 export const registerRias = async (req, res) => {
   const {
@@ -83,6 +88,24 @@ export const getPsicoForCompany = async (req, res) => {
   try {
     const [data] = await selectPsicoFroCompany(req.params.empresa);
     return res.status(201).json(data);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      status: "error",
+      message: `ERROR DE SERVIDOR: ${error}`,
+    });
+  }
+};
+
+export const getStudentForCompany = async (req, res) => {
+  try {
+    if(req.params.id == "null"){
+      const [data] = await selectAllStudent();
+      return res.status(200).json(data);
+    }else{
+      const [data] = await selectAlStudentForCompany(req.params.id);
+      return res.status(200).json(data);
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).json({

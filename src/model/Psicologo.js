@@ -82,3 +82,26 @@ export const newRegisterRias = async (data) => {
     ]
   );
 };
+export const selectAlStudentForCompany = async (id) => {
+  return await conexion.query(
+    `select usuario.Id as id, usuario.Usuario as usuario, apoderado.Nombre_Niño as apoderado, empresa.nombre as institucion, rias.Total, rias.fecha_evaluación, usuario.estado
+  from usuario 
+  inner join rol on rol.Id = usuario.IdRol
+  inner join empresa on empresa.id = usuario.id_empresa
+  inner join apoderado on apoderado.Iduser = Usuario.Id
+  inner join rias on rias.Idapoderado = apoderado.id
+  where empresa.id = ?`,
+    [id]
+  );
+};
+
+export const selectAllStudent = async () => {
+  return await conexion.query(
+    `select usuario.Id as id, usuario.Usuario as usuario, apoderado.Nombre_Niño as apoderado, empresa.nombre as institucion, rias.Total, rias.fecha_evaluación, usuario.estado
+  from usuario 
+  inner join rol on rol.Id = usuario.IdRol
+  inner join empresa on empresa.id = usuario.id_empresa
+  inner join apoderado on apoderado.Iduser = Usuario.Id
+  inner join rias on rias.Idapoderado = apoderado.id`
+  );
+};

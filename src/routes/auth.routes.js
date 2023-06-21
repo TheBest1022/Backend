@@ -11,6 +11,6 @@ const router = Router();
 router.post("/", singIng) // ingresar
 router.post("/admin/register", createUser) // crear
 router.post("/register", singUp) // Registro
-router.post("/register/director", createDirector) // Registro director
+router.post("/register/director", createDirector) // Registro director  
 
 export default router;
