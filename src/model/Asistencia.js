@@ -10,12 +10,14 @@ export const insertAssistence = async (id, data, estado) => {
 //Traer reporte de asistencia
 export const selectAssistence = async (id) => {
   return await conexion.query(
-    `select a.id as id, d.Nombre as docente, ap.Nombre_Niño as estudiante, c.Descripción as curso, a.estado as estado, a.fecha as fecha, c.id as id_curso, d.Id as id_docente, ap.Id as id_estudiante, em.nombre as empresa
-    from asistencia a inner join docente d on a.id_docente = d.Id
-                    inner join apoderado ap on a.id_estudiante=ap.Id
-                    inner join curso c on d.Id = c.idDocente
-                    inner join empresa em on a.id_empresa = em.id
-    where em.id = ?
-    GROUP BY a.id`, [id]
+    `SELECT a.id AS id, d.Nombre AS docente, ap.Nombre_Niño AS estudiante, c.Descripción AS curso, a.estado AS estado, a.fecha AS fecha, c.id AS id_curso, d.Id AS id_docente, 
+    ap.Id AS id_estudiante, em.nombre AS empresa
+    FROM asistencia a 
+      INNER JOIN docente d ON a.id_docente = d.Id
+      INNER JOIN apoderado ap ON a.id_estudiante = ap.Id
+      INNER JOIN curso c ON d.Id = c.Id
+      INNER JOIN empresa em ON a.id_empresa = em.id
+      where em.id = ?
+      GROUP BY a.id`,[id]
   );
 };
